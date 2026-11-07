@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flames n Spirits | Dark Luxury Family Café</title>
+    <meta name="description" content="A premium non-alcoholic sanctuary in Sainikpuri, Hyderabad. Where Darkness Tastes Golden.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta property="og:title" content="Flames n Spirits | Dark Luxury Family Café">
+    <meta property="og:description" content="A premium non-alcoholic sanctuary in Sainikpuri, Hyderabad. Where Darkness Tastes Golden.">
+    <meta property="og:image" content="images/signature_grill_appetizing.png">
+    <meta property="og:type" content="restaurant">
+    <meta name="theme-color" content="#0D0D0D">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════════════════════════════ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 76px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: #0D0D0D;
+            color: #F5EDD6;
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        ::selection { background: #C9A84C; color: #0D0D0D; }
+
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
+        button { font-family: inherit; cursor: pointer; }
+
+        /* ═══════════════════════════════════════════════════════════════
+           CSS VARIABLES
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --gold: #C9A84C;
+            --gold-dim: rgba(201, 168, 76, 0.4);
+            --gold-subtle: rgba(201, 168, 76, 0.12);
+            --gold-faint: rgba(201, 168, 76, 0.08);
+            --cream: #F5EDD6;
+            --cream-50: rgba(245, 237, 214, 0.5);
+            --cream-40: rgba(245, 237, 214, 0.4);
+            --cream-35: rgba(245, 237, 214, 0.35);
+            --cream-60: rgba(245, 237, 214, 0.6);
+            --dark: #0D0D0D;
+            --dark-card: rgba(26, 26, 26, 0.85);
+            --dark-alt: #111111;
+            --crimson: #8B1A1A;
+            --font-display: 'Playfair Display', serif;
+            --font-accent: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════════════════════════════ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-12px); }
+        }
+
+        @keyframes floatLeft {
+            0%, 100% { transform: translateY(-50%) rotate(-4deg); }
+            50%      { transform: translateY(-53%) rotate(-3deg); }
+        }
+
+        @keyframes floatRight1 {
+            0%, 100% { transform: rotate(3deg); }
+            50%      { transform: rotate(4.5deg) translateY(-6px); }
+        }
+
+        @keyframes floatRight2 {
+            0%, 100% { transform: rotate(-2deg); }
+            50%      { transform: rotate(-3deg) translateY(6px); }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50%      { transform: translateY(8px); opacity: 0.4; }
+        }
+
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes shimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.04; }
+            50%      { opacity: 0.08; }
+        }
+
+        /* Scroll-triggered animation class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+        .reveal-delay-4 { transition-delay: 0.6s; }
+
+        /* ═══════════════════════════════════════════════════════════════
+           NAVBAR
+           ═══════════════════════════════════════════════════════════════ */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 68px;
+            background: rgba(13, 13, 13, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--gold-subtle);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+        }
+
+        .navbar-inner {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo { display: flex; align-items: center; gap: 12px; }
+        .navbar-logo img { width: 52px; height: 52px; object-fit: contain; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-link {
+            font-size: 11px;
+            color: var(--cream);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 500;
+            transition: color 0.25s ease;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover { color: var(--gold); }
+        .nav-link:hover::after { width: 100%; }
+
+        .nav-reserve {
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 24px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        .nav-reserve:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        /* Mobile */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold);
+            padding: 8px;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--dark);
+            z-index: 1100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .mobile-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 32px; right: 32px;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        .mobile-link {
+            font-family: var(--font-display);
+            font-size: 32px;
+            color: var(--cream);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+        .mobile-link:hover { color: var(--gold); }
+
+        .mobile-reserve-btn {
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 16px 48px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        .mobile-reserve-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none !important; }
+            .mobile-toggle { display: block; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           HERO SECTION
+           ═══════════════════════════════════════════════════════════════ */
+        .hero {
+            height: 100vh;
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+            pointer-events: none;
+            animation: glowPulse 6s ease-in-out infinite;
+        }
+
+        /* Floating photos */
+        .floating-left {
+            position: absolute;
+            left: 5%; top: 50%;
+            transform: translateY(-50%) rotate(-4deg);
+            width: 220px; height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 32px 64px rgba(0,0,0,0.6);
+            z-index: 5;
+            animation: fadeInLeft 1.2s 0.8s ease-out both, floatLeft 12s ease-in-out infinite;
+        }
+        .floating-left img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+
+        .floating-right {
+            position: absolute;
+            right: 5%; top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 5;
+            animation: fadeInRight 1.2s 1s ease-out both;
+        }
+
+        .floating-right-img1 {
+            width: 200px; height: 200px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+            animation: floatRight1 10s ease-in-out infinite;
+        }
+
+        .floating-right-img2 {
+            width: 200px; height: 160px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+            background: #1A1A1A;
+            animation: floatRight2 12s ease-in-out infinite;
+        }
+
+        .floating-right-img1 img,
+        .floating-right-img2 img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+
+        /* Center Card */
+        .hero-card {
+            width: 520px; max-width: 90vw;
+            background: var(--dark-card);
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: 20px;
+            padding: 56px 48px;
+            backdrop-filter: blur(20px);
+            text-align: center;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+            z-index: 10;
+            animation: fadeIn 1.2s ease-out both;
+        }
+
+        .hero-card-inner {
+            animation: floatY 8s ease-in-out infinite;
+        }
+
+        .hero-logo {
+            width: 110px; height: 110px;
+            object-fit: contain;
+            margin: 0 auto;
+            animation: fadeInUp 1.2s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .hero-rule {
+            width: 48px; height: 1px;
+            background: var(--gold);
+            margin: 16px auto;
+            animation: fadeInUp 1.2s 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-accent);
+            font-size: 22px;
+            color: rgba(245,237,214,0.7);
+            font-style: italic;
+            margin-bottom: 8px;
+            animation: fadeInUp 1.2s 0.76s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .hero-sub {
+            font-size: 13px;
+            color: var(--cream-40);
+            margin-bottom: 36px;
+            line-height: 1.6;
+            animation: fadeInUp 1.2s 0.94s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .hero-cta-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            animation: fadeInUp 1.2s 1.12s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s ease;
+        }
+        .cta-primary:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201,168,76,0.2);
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            border: 1px solid var(--gold-dim);
+            color: var(--cream);
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s ease;
+        }
+        .cta-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .hero-story-link {
+            font-size: 12px;
+            color: rgba(245,237,214,0.45);
+            transition: color 0.25s ease;
+        }
+        .hero-story-link:hover { color: var(--gold); text-decoration: underline; }
+
+        .hero-rating {
+            border-top: 1px solid rgba(201,168,76,0.1);
+            padding-top: 20px;
+            margin-top: 28px;
+            font-size: 11px;
+            color: var(--cream-35);
+            animation: fadeInUp 1.2s 1.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .hero-stars { color: var(--gold); margin-right: 6px; }
+
+        /* Non-alcoholic badge */
+        .na-badge {
+            position: absolute;
+            bottom: 28px; right: 28px;
+            border: 1px solid rgba(201,168,76,0.25);
+            padding: 8px 16px;
+            background: rgba(13,13,13,0.9);
+            z-index: 15;
+            font-size: 9px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            animation: fadeIn 1s 1.5s both;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px; left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 20;
+            pointer-events: none;
+            animation: fadeIn 1s 2s both;
+            transition: opacity 0.4s ease;
+        }
+        .scroll-label {
+            font-size: 9px;
+            color: #8B6914;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+        .scroll-line {
+            width: 1px; height: 32px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollPulse 1.5s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .floating-left, .floating-right { display: none !important; }
+            .hero-card { width: 90vw; padding: 40px 28px; border-radius: 16px; }
+            .hero-tagline { font-size: 19px; }
+            .hero-cta-row { flex-direction: column; gap: 12px; }
+            .hero-cta-row a, .hero-cta-row .cta-primary, .hero-cta-row .cta-secondary { width: 100%; text-align: center; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           AMBIANCE SECTION
+           ═══════════════════════════════════════════════════════════════ */
+        .ambiance {
+            background: var(--dark-alt);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .ambiance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 64px;
+            flex-wrap: wrap;
+            gap: 32px;
+        }
+
+        .section-eyebrow {
+            font-size: 11px;
+            color: var(--gold);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title span:first-child {
+            font-family: var(--font-display);
+            font-size: 52px;
+            color: var(--cream);
+            font-weight: 600;
+        }
+        .section-title span:last-child {
+            font-family: var(--font-accent);
+            font-size: 52px;
+            color: var(--gold);
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .ambiance-desc {
+            font-size: 15px;
+            color: var(--cream-50);
+            line-height: 1.6;
+            max-width: 420px;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.9fr 1fr;
+            height: 480px;
+            gap: 12px;
+            margin-bottom: 80px;
+        }
+
+        .gallery-cell {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .gallery-cell img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .gallery-cell:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-label {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 40px 24px 20px 24px;
+            background: linear-gradient(to top, rgba(13,13,13,0.85), transparent);
+            z-index: 2;
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--cream);
+            letter-spacing: 0.05em;
+        }
+
+        /* Marquee */
+        .marquee-bar {
+            background: var(--crimson);
+            padding: 14px 0;
+            overflow: hidden;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: fit-content;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-group {
+            display: flex;
+            gap: 60px;
+            padding-right: 60px;
+        }
+
+        .marquee-item {
+            font-size: 11px;
+            color: var(--cream);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 24px; }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .gallery-cell { height: 300px; }
+            .section-title span { font-size: 36px !important; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           SIGNATURES SECTION
+           ═══════════════════════════════════════════════════════════════ */
+        .signatures {
+            background: #0A0A0A;
+            padding: 120px 0;
+            position: relative;
+            border-top: 1px solid var(--gold-subtle);
+            border-bottom: 1px solid var(--gold-subtle);
+        }
+
+        .signatures-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 64px;
+        }
+
+        .signatures-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .signature-card {
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .signature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201, 168, 76, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(201, 168, 76, 0.1);
+        }
+
+        .signature-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            background: #141414;
+        }
+
+        .signature-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .signature-card:hover .signature-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .signature-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(13, 13, 13, 0.85);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 9px;
+            padding: 4px 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+        }
+
+        .signature-body {
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .signature-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--cream);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .signature-desc {
+            font-size: 13px;
+            color: var(--cream-50);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .signature-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            padding-top: 16px;
+        }
+
+        .signature-price {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .signature-link {
+            font-size: 11px;
+            color: var(--cream);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color 0.25s;
+        }
+
+        .signature-link:hover {
+            color: var(--gold);
+        }
+
+        @media (max-width: 1024px) {
+            .signatures-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .signatures-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           RESERVATION SECTION
+           ═══════════════════════════════════════════════════════════════ */
+        .reservation {
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A0A0A 100%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .reserve-left {
+            padding: 80px;
+            position: relative;
+        }
+
+        .reserve-perks {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 64px;
+        }
+
+        .perk-item {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .perk-dash { color: var(--gold); font-weight: 700; }
+        .perk-text { font-size: 14px; color: var(--cream-50); letter-spacing: 0.02em; }
+
+        .reserve-photo {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border: 1px solid rgba(201,168,76,0.15);
+            overflow: hidden;
+        }
+        .reserve-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+
+        .reserve-right {
+            background: var(--dark-alt);
+            padding: 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .reserve-form {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            border: none;
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            background: transparent;
+            color: var(--cream);
+            padding: 16px 0;
+            font-family: var(--font-body);
+            font-size: 14px;
+            outline: none;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-bottom-color: var(--gold);
+        }
+        .form-input::placeholder, .form-textarea::placeholder {
+            color: rgba(245, 237, 214, 0.3);
+        }
+
+        .form-select option { background: var(--dark); }
+
+        .form-row { display: flex; gap: 24px; flex-wrap: wrap; }
+        .form-row > * { flex: 1; min-width: 150px; }
+
+        .form-textarea { resize: none; }
+
+        .submit-btn {
+            height: 56px;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+        }
+        .submit-btn:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201,168,76,0.2);
+        }
+
+        .reserve-note {
+            font-size: 11px;
+            color: var(--cream-35);
+            text-align: center;
+            margin-top: 32px;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .reservation { grid-template-columns: 1fr; }
+            .reserve-left { padding: 80px 32px; }
+            .reserve-right { padding: 48px 32px; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           LOCATION SECTION
+           ═══════════════════════════════════════════════════════════════ */
+        .location {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 580px;
+            background: var(--dark);
+        }
+
+        .location-info {
+            padding: 72px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .location-eyebrow {
+            font-size: 11px;
+            color: #8B6914;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .location-name {
+            font-family: var(--font-display);
+            font-size: 48px;
+            color: var(--cream);
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        .location-rule {
+            width: 48px; height: 1px;
+            background: var(--gold);
+            margin: 24px 0;
+        }
+
+        .location-address {
+            font-size: 14px;
+            color: rgba(245,237,214,0.65);
+            line-height: 1.8;
+        }
+
+        .location-hours {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hour-badge {
+            border: 1px solid rgba(201,168,76,0.35);
+            padding: 8px 16px;
+            font-size: 11px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        .location-phone {
+            font-size: 14px;
+            color: var(--gold);
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        .directions-btn {
+            height: 52px;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 32px;
+            transition: all 0.3s ease;
+        }
+        .directions-btn:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+        }
+
+        .location-map {
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+        .location-map iframe {
+            width: 100%; height: 100%;
+            border: none;
+            filter: grayscale(1) invert(0.9) contrast(1.2) brightness(0.8);
+        }
+
+        @media (max-width: 768px) {
+            .location { grid-template-columns: 1fr; min-height: auto; }
+            .location-map { height: 400px; }
+            .location-info { padding: 48px 32px; }
+            .location-name { font-size: 32px; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════════════════ */
+        .footer {
+            background: #080808;
+            border-top: 1px solid rgba(201,168,76,0.1);
+            padding: 64px 80px 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1280px;
+            margin: 0 auto 64px;
+        }
+
+        .footer-brand-name {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--cream);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-brand-desc {
+            font-size: 13px;
+            color: var(--cream-50);
+            line-height: 1.6;
+            max-width: 240px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icon {
+            color: var(--cream-40);
+            transition: color 0.3s ease;
+            width: 20px; height: 20px;
+        }
+        .social-icon:hover { color: var(--gold); }
+
+        .footer-heading {
+            font-size: 11px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .footer-link {
+            font-size: 11px;
+            color: var(--cream-60);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover { color: var(--gold); }
+
+        .footer-address {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--cream);
+        }
+
+        .footer-phone {
+            font-size: 18px;
+            color: var(--gold);
+            font-weight: 600;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .footer-email {
+            font-size: 13px;
+            color: var(--cream-40);
+            margin-top: 12px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gold-faint);
+            padding-top: 24px;
+            margin-top: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-copy {
+            font-size: 11px;
+            color: rgba(245,237,214,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .footer { padding: 48px 32px 32px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 48px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         NAVBAR
+         ══════════════════════════════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-logo">
+                <img src="images/logo.svg" alt="Flames n Spirits">
+            </a>
+
+            <div class="nav-links">
+                <a href="menu.html" class="nav-link">Repertoire</a>
+                <a href="#signatures" class="nav-link">Signatures</a>
+                <a href="#ambiance" class="nav-link">Ambiance</a>
+                <a href="#gallery" class="nav-link">Inside</a>
+                <a href="#location" class="nav-link">Contact</a>
+                <a href="#reserve" class="nav-reserve">Reserve</a>
+            </div>
+
+            <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileMenu">
+        <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+        <a href="menu.html" class="mobile-link">Repertoire</a>
+        <a href="#signatures" class="mobile-link" onclick="closeMobileMenu()">Signatures</a>
+        <a href="#ambiance" class="mobile-link" onclick="closeMobileMenu()">Ambiance</a>
+        <a href="#gallery" class="mobile-link" onclick="closeMobileMenu()">Inside</a>
+        <a href="#location" class="mobile-link" onclick="closeMobileMenu()">Contact</a>
+        <a href="#reserve" class="mobile-reserve-btn" onclick="closeMobileMenu()">Reserve Now</a>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         HERO SECTION
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-glow"></div>
+
+        <!-- Left floating photo -->
+        <div class="floating-left">
+            <img src="images/interior.webp" alt="Luxury Interior">
+        </div>
+
+        <!-- Center card -->
+        <div class="hero-card">
+            <div class="hero-card-inner">
+                <img src="images/logo.svg" alt="Flames n Spirits" class="hero-logo">
+                <div class="hero-rule"></div>
+                <p class="hero-tagline">Where Darkness Tastes Golden.</p>
+                <p class="hero-sub">A dark luxury sanctuary in the heart of Sainikpuri.</p>
+
+                <div class="hero-cta-row">
+                    <a href="menu.html" class="cta-primary">Our Menu</a>
+                    <a href="#reserve" class="cta-secondary">Reserve a Table</a>
+                    <a href="#ambiance" class="hero-story-link">Our Story</a>
+                </div>
+
+                <div class="hero-rating">
+                    <span class="hero-stars">★★★★★</span>
+                    4.9 · 2,000+ guests · Sainikpuri, Hyderabad
+                </div>
+            </div>
+        </div>
+
+        <!-- Right floating photos -->
+        <div class="floating-right">
+            <div class="floating-right-img1">
+                <img src="images/food-chilli.webp" alt="Signature Dish">
+            </div>
+            <div class="floating-right-img2">
+                <img src="images/entrance.jpg" alt="Venue Entrance">
+            </div>
+        </div>
+
+        <!-- Non-alcoholic badge -->
+        <div class="na-badge">100% NON-ALCOHOLIC</div>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" id="scrollIndicator">
+            <span class="scroll-label">Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         AMBIANCE SECTION
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="ambiance" id="ambiance">
+        <div class="container">
+            <div class="ambiance-header">
+                <div class="reveal">
+                    <p class="section-eyebrow">Step Inside</p>
+                    <h2 class="section-title">
+                        <span>The </span><span>Sanctuary</span>
+                    </h2>
+                </div>
+                <p class="ambiance-desc reveal reveal-delay-1">
+                    Immerse yourself in a narrative of light and shadow. Crimson velvet, black marble, and golden glows converge to create Hyderabad's most intimate dining destination.
+                </p>
+            </div>
+
+            <div class="gallery-grid reveal reveal-delay-2" id="gallery">
+                <div class="gallery-cell">
+                    <img src="images/interior.webp" alt="Crimson Booths">
+                    <div class="gallery-label">Crimson Booths</div>
+                </div>
+                <div class="gallery-cell">
+                    <img src="images/entrance.jpg" alt="The Atmosphere">
+                    <div class="gallery-label">The Atmosphere</div>
+                </div>
+                <div class="gallery-cell">
+                    <img src="images/food-chilli.webp" alt="Golden Details">
+                    <div class="gallery-label">Golden Details</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marquee -->
+        <div class="marquee-bar">
+            <div class="marquee-track">
+                <div class="marquee-group">
+                    <span class="marquee-item">Dark Ambiance</span>
+                    <span class="marquee-item">Gold Service</span>
+                    <span class="marquee-item">Family Welcome</span>
+                    <span class="marquee-item">Non-Alcoholic</span>
+                    <span class="marquee-item">Sainikpuri</span>
+                    <span class="marquee-item">Since 2023</span>
+                </div>
+                <div class="marquee-group">
+                    <span class="marquee-item">Dark Ambiance</span>
+                    <span class="marquee-item">Gold Service</span>
+                    <span class="marquee-item">Family Welcome</span>
+                    <span class="marquee-item">Non-Alcoholic</span>
+                    <span class="marquee-item">Sainikpuri</span>
+                    <span class="marquee-item">Since 2023</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SIGNATURES SECTION (CURATED CULINARY HIGHLIGHTS)
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="signatures" id="signatures">
+        <div class="container">
+            <div class="signatures-header reveal">
+                <p class="section-eyebrow">Culinary Repertoire</p>
+                <h2 class="section-title">
+                    <span>Chef's </span><span>Signatures</span>
+                </h2>
+                <p style="font-size: 14px; color: var(--cream-50); line-height: 1.6; margin-top: 16px;">
+                    Each dish is a choreographed interplay of flame, spice, and artisanal plating. Hand-crafted for discerning palates.
+                </p>
+            </div>
+
+            <div class="signatures-grid">
+                <!-- Card 1 -->
+                <div class="signature-card reveal reveal-delay-1">
+                    <div class="signature-img-wrap">
+                        <img src="images/signature_grill_appetizing.png" alt="Signature Flame Grills">
+                        <span class="signature-badge">Fire Crafted</span>
+                    </div>
+                    <div class="signature-body">
+                        <div>
+                            <h3 class="signature-title">Signature Flame Grills</h3>
+                            <p class="signature-desc">Tender cuts marinated in secret dry spices, slow-charred over open embers for smoky perfection.</p>
+                        </div>
+                        <div class="signature-footer">
+                            <span class="signature-price">₹328</span>
+                            <a href="menu.html" class="signature-link">View Menu →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="signature-card reveal reveal-delay-2">
+                    <div class="signature-img-wrap">
+                        <img src="images/artisanal_mixology_bronze.png" alt="Zero-Proof Mixology">
+                        <span class="signature-badge">Zero-Proof</span>
+                    </div>
+                    <div class="signature-body">
+                        <div>
+                            <h3 class="signature-title">Artisanal Elixirs</h3>
+                            <p class="signature-desc">Botanical infusions, smoked rosemary, spiced mango, and clarified citrus mocktails of unparalleled depth.</p>
+                        </div>
+                        <div class="signature-footer">
+                            <span class="signature-price">₹223</span>
+                            <a href="menu.html" class="signature-link">View Menu →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="signature-card reveal reveal-delay-3">
+                    <div class="signature-img-wrap">
+                        <img src="images/chinese_fried_rice_premium_plating.png" alt="Wok-Tossed Imperial Rice">
+                        <span class="signature-badge">House Special</span>
+                    </div>
+                    <div class="signature-body">
+                        <div>
+                            <h3 class="signature-title">Imperial Wok Rice</h3>
+                            <p class="signature-desc">High-flame wok tossed with burnt garlic, scallions, rich aromatics, and your choice of protein or crisp greens.</p>
+                        </div>
+                        <div class="signature-footer">
+                            <span class="signature-price">₹328</span>
+                            <a href="menu.html" class="signature-link">View Menu →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="signature-card reveal reveal-delay-4">
+                    <div class="signature-img-wrap">
+                        <img src="images/appetizer_chicken_65.png" alt="Authentic Hyderabadi Starters">
+                        <span class="signature-badge">Classic</span>
+                    </div>
+                    <div class="signature-body">
+                        <div>
+                            <h3 class="signature-title">Hyderabadi Chicken 65</h3>
+                            <p class="signature-desc">The legendary Sainikpuri recipe with fresh curry leaves, crushed peppercorns, and tempered yogurt glaze.</p>
+                        </div>
+                        <div class="signature-footer">
+                            <span class="signature-price">₹273</span>
+                            <a href="menu.html" class="signature-link">View Menu →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="reservation" id="reserve">
+        <div class="reserve-left">
+            <p class="section-eyebrow reveal">Private Booking</p>
+            <h2 class="section-title reveal reveal-delay-1" style="margin-bottom: 40px;">
+                <span style="display:block;">Command</span>
+                <span>Your Table</span>
+            </h2>
+
+            <div class="reserve-perks reveal reveal-delay-2">
+                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Priority seating in crimson booths</span></div>
+                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Perfect for intimate family gatherings</span></div>
+                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Vibrant non-alcoholic mixology</span></div>
+                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Sainikpuri's premier dark luxury ambiance</span></div>
+                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Groups up to 8 · larger via concierge</span></div>
+            </div>
+
+            <div class="reserve-photo reveal reveal-delay-3">
+                <img src="images/interior.webp" alt="Interior">
+            </div>
+        </div>
+
+        <div class="reserve-right">
+            <form class="reserve-form" onsubmit="handleReservation(event)">
+                <input type="text" class="form-input" placeholder="Full Name" required>
+                <div class="form-row">
+                    <input type="date" class="form-input">
+                    <select class="form-select">
+                        <option value="1">1 Guest</option>
+                        <option value="2" selected>2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                        <option value="7">7 Guests</option>
+                        <option value="8">8 Guests</option>
+                        <option value="9">9 Guests</option>
+                        <option value="10">10 Guests</option>
+                    </select>
+                </div>
+                <input type="tel" class="form-input" placeholder="Phone Number (+91)">
+                <textarea class="form-textarea" placeholder="Special Requests (Optional)" rows="3"></textarea>
+                <button type="submit" class="submit-btn">Confirm Reservation →</button>
+            </form>
+            <p class="reserve-note">For groups 8+ contact us directly · +91 97003 33116</p>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         LOCATION SECTION
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="location" id="location">
+        <div class="location-info">
+            <div>
+                <p class="location-eyebrow reveal">The Domain</p>
+                <h2 class="location-name reveal reveal-delay-1">Flames n Spirits</h2>
+                <div class="location-rule reveal reveal-delay-1"></div>
+
+                <div class="location-address reveal reveal-delay-2">
+                    <p>Plot No. 137, Phase-II, Sainikpuri</p>
+                    <p>Secunderabad, Hyderabad, Telangana 500094</p>
+                </div>
+
+                <div class="location-hours reveal reveal-delay-2">
+                    <div class="hour-badge">Lunch 12–3PM</div>
+                    <div class="hour-badge">Dinner 7–11:30PM</div>
+                </div>
+
+                <p class="location-phone reveal reveal-delay-3">+91 97003 33116</p>
+            </div>
+
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Flames+n+Spirits+Sainikpuri+Hyderabad" target="_blank" rel="noopener noreferrer" class="directions-btn reveal reveal-delay-3">
+                Get Directions →
+            </a>
+        </div>
+
+        <div class="location-map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.343118239089!2d78.5447781759495!3d17.4913256037803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9be0334860b9%3A0xe543501a50b86a8!2sFlames%20N%20Spirits!5e0!3m2!1sen!2sin!4v1700300000000!5m2!1sen!2sin"
+                allowfullscreen
+                loading="lazy"
+                title="Flames n Spirits Location"
+            ></iframe>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         FOOTER
+         ══════════════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <!-- Brand -->
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="images/logo.svg" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;">
+                    <span class="footer-brand-name">Flames n Spirits</span>
+                </div>
+                <p class="footer-brand-desc">The Perfect Family Café, Sainikpuri. A sanctuary of dark luxury and culinary artistry.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Website">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4" ry="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <h4 class="footer-heading">Navigation</h4>
+                <a href="menu.html" class="footer-link">Repertoire</a>
+                <a href="#signatures" class="footer-link">Signatures</a>
+                <a href="#ambiance" class="footer-link">Ambiance</a>
+                <a href="#gallery" class="footer-link">Inside</a>
+                <a href="#reserve" class="footer-link">Reserve</a>
+            </div>
+
+            <!-- Contact -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <h4 class="footer-heading">Reserve Tonight</h4>
+                <p class="footer-address">Plot No. 137, Phase-II</p>
+                <a href="tel:+919700333116" class="footer-phone">+91 97003 33116</a>
+                <p class="footer-email">hello@flamesnspirits.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span class="footer-copy">© <span id="year"></span> Flames n Spirits. All rights reserved.</span>
+            <span class="footer-copy">Crafted in Sainikpuri, Hyderabad</span>
+        </div>
+    </footer>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         JAVASCRIPT
+         ══════════════════════════════════════════════════════════════════ -->
+    <script>
+        // ── Year ──
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ── Mobile Menu ──
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ── Scroll Reveal ──
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // ── Hide scroll indicator on scroll ──
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+        }, { passive: true });
+
+        // ── Reservation form ──
+        function handleReservation(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('.submit-btn');
+            btn.textContent = '✓ REQUEST SENT';
+            btn.style.background = '#4CAF50';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+                btn.textContent = 'CONFIRM RESERVATION →';
+                btn.style.background = '';
+                btn.style.color = '';
+                e.target.reset();
+            }, 3000);
+        }
+
+        // ── Parallax on hero glow ──
+        window.addEventListener('mousemove', (e) => {
+            const glow = document.querySelector('.hero-glow');
+            if (glow) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 30;
+                const y = (e.clientY / window.innerHeight - 0.5) * 30;
+                glow.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
+

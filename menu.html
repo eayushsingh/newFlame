@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | Flames n Spirits</title>
+    <meta name="description" content="Explore our full menu — soups, starters, biryanis, pizzas, milkshakes, coffees, mocktails, and more.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta property="og:title" content="Repertoire | Flames n Spirits">
+    <meta property="og:description" content="Explore our full culinary repertoire — soups, starters, biryanis, pizzas, milkshakes, coffees, mocktails, and desserts.">
+    <meta property="og:image" content="images/signature_grill_appetizing.png">
+    <meta property="og:type" content="restaurant.menu">
+    <meta name="theme-color" content="#0D0D0D">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-font-smoothing: antialiased; }
+        body {
+            background: #0D0D0D;
+            color: #F5EDD6;
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        ::selection { background: #C9A84C; color: #0D0D0D; }
+        a { text-decoration: none; color: inherit; }
+        button { font-family: inherit; cursor: pointer; }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-dim: rgba(201, 168, 76, 0.4);
+            --gold-subtle: rgba(201, 168, 76, 0.12);
+            --gold-faint: rgba(201, 168, 76, 0.08);
+            --cream: #F5EDD6;
+            --cream-50: rgba(245, 237, 214, 0.5);
+            --cream-40: rgba(245, 237, 214, 0.4);
+            --cream-35: rgba(245, 237, 214, 0.35);
+            --cream-60: rgba(245, 237, 214, 0.6);
+            --cream-70: rgba(245, 237, 214, 0.7);
+            --dark: #0D0D0D;
+            --dark-alt: #111111;
+            --crimson: #8B1A1A;
+            --green: #4CAF50;
+            --font-display: 'Playfair Display', serif;
+            --font-accent: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        /* ═══ NAVBAR ═══ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: 68px;
+            background: rgba(13, 13, 13, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--gold-subtle);
+            z-index: 1000;
+            display: flex; align-items: center; padding: 0 32px;
+        }
+        .navbar-inner {
+            width: 100%; max-width: 1280px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .navbar-logo { display: flex; align-items: center; gap: 12px; }
+        .navbar-logo img { width: 52px; height: 52px; object-fit: contain; }
+        .nav-links { display: flex; align-items: center; gap: 40px; }
+        .nav-link {
+            font-size: 11px; color: var(--cream); text-transform: uppercase;
+            letter-spacing: 0.18em; font-weight: 500; transition: color 0.25s;
+            position: relative;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 1px; background: var(--gold); transition: width 0.3s;
+        }
+        .nav-link:hover { color: var(--gold); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-reserve {
+            border: 1px solid var(--gold); color: var(--gold);
+            padding: 10px 24px; font-size: 11px; text-transform: uppercase;
+            letter-spacing: 0.1em; font-weight: 700; background: transparent;
+            transition: all 0.3s;
+        }
+        .nav-reserve:hover { background: var(--gold); color: var(--dark); }
+        .mobile-toggle {
+            display: none; background: none; border: none;
+            color: var(--gold); padding: 8px;
+        }
+        .mobile-overlay {
+            position: fixed; inset: 0; background: var(--dark); z-index: 1100;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 40px;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s;
+        }
+        .mobile-overlay.active { opacity: 1; pointer-events: all; }
+        .mobile-close {
+            position: absolute; top: 32px; right: 32px;
+            background: none; border: none; color: var(--gold);
+            font-size: 32px; cursor: pointer;
+        }
+        .mobile-link {
+            font-family: var(--font-display); font-size: 32px;
+            color: var(--cream); text-transform: uppercase;
+            letter-spacing: 0.1em; transition: color 0.3s;
+        }
+        .mobile-link:hover { color: var(--gold); }
+        @media (max-width: 768px) {
+            .nav-links { display: none !important; }
+            .mobile-toggle { display: block; }
+        }
+
+        /* ═══ ANIMATIONS ═══ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ═══ MENU PAGE ═══ */
+        .menu-page {
+            background: var(--dark);
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+        .menu-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--gold); font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            margin-bottom: 40px; transition: opacity 0.3s;
+        }
+        .back-link:hover { opacity: 0.7; }
+
+        /* Header */
+        .menu-header { margin-bottom: 64px; }
+        .menu-eyebrow {
+            color: var(--gold); font-size: 11px;
+            letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px;
+        }
+        .menu-title {
+            font-family: var(--font-display);
+            font-size: clamp(42px, 5vw, 64px);
+            color: var(--cream); line-height: 1.1;
+            font-weight: 400;
+        }
+        .menu-title em {
+            font-family: var(--font-accent);
+            color: var(--gold); font-style: italic;
+        }
+
+        /* Search */
+        .menu-search {
+            width: 100%; max-width: 480px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+            color: var(--cream); font-size: 14px;
+            padding: 12px 0; outline: none;
+            font-family: var(--font-body);
+            transition: border-color 0.3s;
+        }
+        .menu-search:focus { border-color: var(--gold); }
+        .menu-search::placeholder { color: rgba(245,237,214,0.3); }
+
+        /* Filter tabs */
+        .filter-controls {
+            display: flex; flex-direction: column;
+            gap: 24px; margin-bottom: 64px;
+        }
+        .filter-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid rgba(201,168,76,0.3);
+            background: transparent;
+            color: var(--cream);
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.25s;
+        }
+        .filter-btn.active {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--dark);
+        }
+        .filter-btn:hover:not(.active) {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Category pills */
+        .category-pills {
+            display: flex; gap: 8px;
+            overflow-x: auto; padding-bottom: 12px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .category-pills::-webkit-scrollbar { display: none; }
+
+        .pill-btn {
+            padding: 8px 16px;
+            border: 1px solid rgba(201,168,76,0.25);
+            background: transparent;
+            color: var(--cream-70);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            transition: all 0.25s;
+        }
+        .pill-btn.active {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--dark);
+            font-weight: 700;
+        }
+        .pill-btn:hover:not(.active) {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Category section */
+        .category-section {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.5s ease-out both;
+        }
+        .category-header {
+            display: flex; align-items: center; gap: 16px;
+            margin-bottom: 32px;
+        }
+        .category-name {
+            font-family: var(--font-display);
+            font-size: 26px; color: var(--cream);
+            font-weight: 400; white-space: nowrap;
+        }
+        .category-line {
+            flex: 1; height: 1px;
+            background: linear-gradient(90deg, rgba(201,168,76,0.4), transparent);
+        }
+
+        /* Items grid */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 0;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--gold-faint);
+            transition: background 0.2s;
+        }
+        .menu-item:hover { background: rgba(201,168,76,0.04); }
+
+        .item-left {
+            display: flex; gap: 12px; align-items: flex-start;
+        }
+
+        .veg-indicator {
+            width: 14px; height: 14px;
+            border: 1.5px solid var(--green);
+            display: flex; align-items: center;
+            justify-content: center; margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .veg-indicator .dot {
+            width: 6px; height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+        .nonveg-indicator {
+            border-color: var(--crimson);
+        }
+        .nonveg-indicator .dot {
+            background: var(--crimson);
+            border-radius: 0;
+        }
+
+        .item-name {
+            font-family: var(--font-display);
+            font-size: 16px; color: var(--cream);
+        }
+
+        .item-price {
+            color: var(--gold);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Footer note */
+        .menu-footer-note {
+            margin-top: 40px; text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(201,168,76,0.1);
+            font-size: 11px;
+            color: var(--cream-35);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* ═══ FOOTER ═══ */
+        .footer {
+            background: #080808;
+            border-top: 1px solid rgba(201,168,76,0.1);
+            padding: 64px 80px 32px;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 32px; max-width: 1280px; margin: 0 auto 64px;
+        }
+        .footer-brand-name {
+            font-family: var(--font-display); font-size: 16px;
+            color: var(--cream); font-weight: 600; letter-spacing: 0.05em;
+        }
+        .footer-brand-desc {
+            font-size: 13px; color: var(--cream-50);
+            line-height: 1.6; max-width: 240px;
+        }
+        .footer-socials { display: flex; gap: 20px; }
+        .social-icon {
+            color: var(--cream-40); transition: color 0.3s;
+            width: 20px; height: 20px;
+        }
+        .social-icon:hover { color: var(--gold); }
+        .footer-heading {
+            font-size: 11px; color: var(--gold); text-transform: uppercase;
+            letter-spacing: 0.2em; margin-bottom: 16px; font-weight: 700;
+        }
+        .footer-link-item {
+            font-size: 11px; color: var(--cream-60); text-transform: uppercase;
+            letter-spacing: 0.15em; height: 36px; display: flex;
+            align-items: center; transition: color 0.3s;
+        }
+        .footer-link-item:hover { color: var(--gold); }
+        .footer-address {
+            font-family: var(--font-display); font-size: 20px; color: var(--cream);
+        }
+        .footer-phone {
+            font-size: 18px; color: var(--gold); font-weight: 600;
+            margin-top: 8px; display: inline-block;
+        }
+        .footer-email { font-size: 13px; color: var(--cream-40); margin-top: 12px; }
+        .footer-bottom {
+            border-top: 1px solid var(--gold-faint); padding-top: 24px;
+            margin-top: 48px; display: flex; justify-content: space-between;
+            align-items: center; max-width: 1280px; margin-left: auto; margin-right: auto;
+        }
+        .footer-copy { font-size: 11px; color: rgba(245,237,214,0.3); }
+        @media (max-width: 768px) {
+            .menu-container { padding: 0 24px; }
+            .items-grid { grid-template-columns: 1fr; }
+            .footer { padding: 48px 32px 32px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 48px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+        }
+
+        /* Smooth category transitions */
+        .category-section {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .category-section.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="navbar-logo">
+                <img src="images/logo.svg" alt="Flames n Spirits">
+            </a>
+            <div class="nav-links">
+                <a href="menu.html" class="nav-link" style="color: var(--gold);">Repertoire</a>
+                <a href="index.html#signatures" class="nav-link">Signatures</a>
+                <a href="index.html#ambiance" class="nav-link">Ambiance</a>
+                <a href="index.html#gallery" class="nav-link">Inside</a>
+                <a href="index.html#location" class="nav-link">Contact</a>
+                <a href="index.html#reserve" class="nav-reserve">Reserve</a>
+            </div>
+            <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobileMenu">
+        <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
+        <a href="menu.html" class="mobile-link">Repertoire</a>
+        <a href="index.html#signatures" class="mobile-link">Signatures</a>
+        <a href="index.html#ambiance" class="mobile-link">Ambiance</a>
+        <a href="index.html#gallery" class="mobile-link">Inside</a>
+        <a href="index.html#location" class="mobile-link">Contact</a>
+        <a href="index.html#reserve" class="mobile-link" style="color: var(--gold);">Reserve</a>
+    </div>
+
+    <!-- MENU PAGE -->
+    <div class="menu-page">
+        <div class="menu-container">
+            <a href="index.html" class="back-link">← Back to Home</a>
+
+            <div class="menu-header">
+                <p class="menu-eyebrow">The Repertoire</p>
+                <h1 class="menu-title">Crafted With <em>Fire &amp; Intention</em></h1>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-controls">
+                <input type="text" class="menu-search" placeholder="Search any dish or drink..." id="searchInput">
+
+                <div class="filter-row" id="filterRow">
+                    <button class="filter-btn active" data-filter="ALL">All</button>
+                    <button class="filter-btn" data-filter="VEG">Veg</button>
+                    <button class="filter-btn" data-filter="NON-VEG">Non-Veg</button>
+                </div>
+
+                <div class="category-pills" id="categoryPills">
+                    <button class="pill-btn active" data-category="ALL">All</button>
+                </div>
+            </div>
+
+            <!-- Menu items container -->
+            <div id="menuContent"></div>
+
+            <div class="menu-footer-note">
+                Non-Alcoholic Establishment · Prices inclusive of taxes
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src="images/logo.svg" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;">
+                    <span class="footer-brand-name">Flames n Spirits</span>
+                </div>
+                <p class="footer-brand-desc">The Perfect Family Café, Sainikpuri. A sanctuary of dark luxury and culinary artistry.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Website">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4" ry="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <h4 class="footer-heading">Navigation</h4>
+                <a href="menu.html" class="footer-link-item">Repertoire</a>
+                <a href="index.html#signatures" class="footer-link-item">Signatures</a>
+                <a href="index.html#ambiance" class="footer-link-item">Ambiance</a>
+                <a href="index.html#gallery" class="footer-link-item">Inside</a>
+                <a href="index.html#reserve" class="footer-link-item">Reserve</a>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <h4 class="footer-heading">Reserve Tonight</h4>
+                <p class="footer-address">Plot No. 137, Phase-II</p>
+                <a href="tel:+919700333116" class="footer-phone">+91 97003 33116</a>
+                <p class="footer-email">hello@flamesnspirits.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copy">© <span id="year"></span> Flames n Spirits. All rights reserved.</span>
+            <span class="footer-copy">Crafted in Sainikpuri, Hyderabad</span>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ═══ FULL MENU DATA ═══
+        const menu = {
+            "Soups": {
+                icon: "🍜",
+                items: [
+                    { name: "Non-Veg Hot & Sour Soup", price: 185, veg: false },
+                    { name: "Non-Veg Lemon Coriander Soup", price: 196, veg: false },
+                    { name: "Non-Veg Manchow Soup", price: 196, veg: false },
+                    { name: "Non-Veg Sweet Corn Soup", price: 207, veg: false },
+                    { name: "Veg Hot & Sour Soup", price: 153, veg: true },
+                    { name: "Veg Lemon Coriander Soup", price: 164, veg: true },
+                    { name: "Veg Manchow Soup", price: 164, veg: true },
+                    { name: "Veg Sweet Corn Soup", price: 164, veg: true }
+                ]
+            },
+            "Veg Starters": {
+                icon: "🥦",
+                items: [
+                    { name: "Baby Corn 65", price: 249, veg: true },
+                    { name: "Baby Corn Manchurian Dry", price: 249, veg: true },
+                    { name: "Chilli Mushroom", price: 218, veg: true },
+                    { name: "Chilli Baby Corn", price: 249, veg: true },
+                    { name: "Chilli Paneer", price: 218, veg: true },
+                    { name: "Crispy Corn (Salt & Pepper)", price: 207, veg: true },
+                    { name: "Manchurian 65", price: 249, veg: true },
+                    { name: "Mushroom Manchurian", price: 218, veg: true },
+                    { name: "Paneer 65", price: 218, veg: true },
+                    { name: "Paneer Manchurian", price: 249, veg: true },
+                    { name: "Veg Manchurian Dry", price: 207, veg: true },
+                    { name: "Veg Manchurian Wet", price: 207, veg: true }
+                ]
+            },
+            "Non-Veg Starters": {
+                icon: "🍗",
+                items: [
+                    { name: "Chicken 65", price: 273, veg: false },
+                    { name: "Chicken Majestic", price: 317, veg: false },
+                    { name: "Chicken Manchurian", price: 273, veg: false },
+                    { name: "Chilli Chicken", price: 273, veg: false },
+                    { name: "Dragon Chicken", price: 306, veg: false },
+                    { name: "Ginger Chicken", price: 273, veg: false },
+                    { name: "Hot & Garlic Chicken", price: 273, veg: false },
+                    { name: "Hot Chilli Wings", price: 306, veg: false },
+                    { name: "Kung Pao Chicken", price: 273, veg: false },
+                    { name: "Lemon Pepper Wings", price: 306, veg: false },
+                    { name: "Chilli Egg", price: 209, veg: false }
+                ]
+            },
+            "Seafood": {
+                icon: "🦐",
+                items: [
+                    { name: "Apollo Fish", price: 372, veg: false },
+                    { name: "Butter Garlic Prawns", price: 405, veg: false },
+                    { name: "Chilli Fish", price: 372, veg: false },
+                    { name: "Chilli Prawns", price: 405, veg: false },
+                    { name: "Ginger Fish", price: 372, veg: false },
+                    { name: "Lollypop Prawns", price: 405, veg: false },
+                    { name: "Schezwan Prawns", price: 405, veg: false }
+                ]
+            },
+            "Rice": {
+                icon: "🍚",
+                items: [
+                    { name: "Chilli Garlic Chicken Fried Rice", price: 328, veg: false },
+                    { name: "Egg Fried Rice", price: 306, veg: false },
+                    { name: "Green Thai Curry With Rice (Non-Veg)", price: 372, veg: false },
+                    { name: "Mixed Fried Rice (Non-Veg)", price: 405, veg: false },
+                    { name: "Prawn Fried Rice", price: 427, veg: false },
+                    { name: "Red Thai Curry With Rice", price: 372, veg: true },
+                    { name: "Schezwan Chicken Fried Rice", price: 328, veg: false },
+                    { name: "Veg Fried Rice", price: 196, veg: true }
+                ]
+            },
+            "Noodles": {
+                icon: "🍝",
+                items: [
+                    { name: "American Chopsuey", price: 328, veg: true },
+                    { name: "Chilli Chicken Noodles", price: 328, veg: false },
+                    { name: "Chilli Garlic Veg Noodles", price: 273, veg: true },
+                    { name: "Egg Noodles", price: 306, veg: false },
+                    { name: "Hakka Noodles - Veg", price: 295, veg: true },
+                    { name: "Mixed Noodles (Veg)", price: 213, veg: true },
+                    { name: "Non-Veg Pan-Fried Noodles", price: 350, veg: false },
+                    { name: "Schezwan Veg Noodles", price: 273, veg: true },
+                    { name: "Veg Pan-Fried Noodles", price: 284, veg: true }
+                ]
+            },
+            "Continental": {
+                icon: "🍟",
+                items: [
+                    { name: "Cheese Garlic Bread", price: 218, veg: true },
+                    { name: "Chicken Cheese Garlic Bread", price: 251, veg: false },
+                    { name: "Chicken Nuggets", price: 241, veg: false },
+                    { name: "Fish Fingers", price: 328, veg: false },
+                    { name: "Jalapeno Cheese Balls", price: 196, veg: true },
+                    { name: "Peri Peri French Fries", price: 207, veg: true },
+                    { name: "Salted French Fries", price: 164, veg: true },
+                    { name: "Veggie Fingers", price: 196, veg: true }
+                ]
+            },
+            "Burgers & Sandwiches": {
+                icon: "🍔",
+                items: [
+                    { name: "EGG & Cheese Bull Burger", price: 218, veg: false },
+                    { name: "Fish Burger", price: 295, veg: false },
+                    { name: "Veg Cheese Burger", price: 185, veg: true },
+                    { name: "Veg Special Cheese Burger", price: 218, veg: true },
+                    { name: "Chipotle Cheese Sandwich", price: 218, veg: true },
+                    { name: "Chipotle Chicken Sandwich", price: 262, veg: false },
+                    { name: "Clubhouse Chicken Sandwich", price: 295, veg: false },
+                    { name: "Corn & Spinach Sandwich", price: 229, veg: true },
+                    { name: "Egg Cheese Sandwich", price: 218, veg: false },
+                    { name: "Paneer Tikka Sandwich", price: 218, veg: true },
+                    { name: "Veg Cheese Sandwich", price: 174, veg: true }
+                ]
+            },
+            "Pizza & Pasta": {
+                icon: "🍕",
+                items: [
+                    { name: "Macaroni Cheese Pasta - Non-Veg (Alfredo/Arrabbiata/Pink)", price: 350, veg: false },
+                    { name: "Macaroni Cheese Pasta Veg", price: 273, veg: true },
+                    { name: "BBQ Chicken Pizza", price: 328, veg: false },
+                    { name: "Cottage Cheese Pizza - Veg", price: 372, veg: true },
+                    { name: "Flames N Spirits Special Pizza", price: 273, veg: true },
+                    { name: "Margherita Pizza", price: 207, veg: true },
+                    { name: "Peri Peri Chicken Pizza", price: 328, veg: false },
+                    { name: "Caesar Salad", price: 218, veg: true }
+                ]
+            },
+            "Milkshakes": {
+                icon: "🥤",
+                items: [
+                    { name: "Black Currant Shake", price: 249, veg: true },
+                    { name: "Blueberry Shake", price: 262, veg: true },
+                    { name: "Brownie Blast Shake", price: 273, veg: true },
+                    { name: "Chocolate Shake", price: 236, veg: true },
+                    { name: "Dark Fantasy Shake", price: 302, veg: true },
+                    { name: "Ferrero Rocher Shake", price: 306, veg: true },
+                    { name: "Kitkat Shake", price: 262, veg: true },
+                    { name: "Litchi Shake", price: 236, veg: true },
+                    { name: "Lotus Biscoff Shake", price: 284, veg: true },
+                    { name: "Mango Shake", price: 236, veg: true },
+                    { name: "Nutella & Almond Shake", price: 262, veg: true },
+                    { name: "Nutella Shake", price: 288, veg: true },
+                    { name: "Oreo Shake", price: 262, veg: true },
+                    { name: "Peanut Butter Shake", price: 288, veg: true },
+                    { name: "Strawberry Shake", price: 236, veg: true }
+                ]
+            },
+            "Hot Coffee": {
+                icon: "☕",
+                items: [
+                    { name: "Affogato", price: 207, veg: true },
+                    { name: "Cafe Latte", price: 174, veg: true },
+                    { name: "Cafe Mocha", price: 185, veg: true },
+                    { name: "Cappuccino", price: 196, veg: true },
+                    { name: "Double Shot Espresso", price: 120, veg: true },
+                    { name: "Espresso", price: 130, veg: true },
+                    { name: "Flat White", price: 164, veg: true },
+                    { name: "Hot Chocolate", price: 196, veg: true },
+                    { name: "Hot Dalgona", price: 153, veg: true },
+                    { name: "Macchiato", price: 183, veg: true },
+                    { name: "Marshmallow Hot Chocolate", price: 236, veg: true },
+                    { name: "Nutella Hot Chocolate", price: 236, veg: true },
+                    { name: "Strawberry Mocha", price: 207, veg: true }
+                ]
+            },
+            "Iced Coffee": {
+                icon: "🧊",
+                items: [
+                    { name: "Black Orange", price: 249, veg: true },
+                    { name: "Cold Brew", price: 223, veg: true },
+                    { name: "Cold Dalgona", price: 236, veg: true },
+                    { name: "Cranberry Coffee", price: 249, veg: true },
+                    { name: "Iced Cappuccino", price: 209, veg: true },
+                    { name: "Iced Latte", price: 209, veg: true },
+                    { name: "Iced Matcha Latte", price: 207, veg: true },
+                    { name: "Mocha Bliss", price: 236, veg: true }
+                ]
+            },
+            "Frappes": {
+                icon: "🫙",
+                items: [
+                    { name: "Brownie Frappe", price: 273, veg: true },
+                    { name: "Cafe Frappe", price: 207, veg: true },
+                    { name: "Flavoured Frappe", price: 249, veg: true },
+                    { name: "Lotus Biscoff Frappe", price: 284, veg: true },
+                    { name: "Mocha Frappe", price: 249, veg: true },
+                    { name: "Nutella Frappe", price: 262, veg: true },
+                    { name: "Oreo Frappe", price: 262, veg: true },
+                    { name: "Peanut Butter Frappe", price: 302, veg: true }
+                ]
+            },
+            "Tea": {
+                icon: "🍵",
+                items: [
+                    { name: "Assam Tea", price: 130, veg: true },
+                    { name: "Chamomile Tea", price: 183, veg: true },
+                    { name: "Green Tea", price: 98, veg: true },
+                    { name: "Masala Tea", price: 130, veg: true },
+                    { name: "Peppermint Tea", price: 170, veg: true },
+                    { name: "Green Apple Iced Tea", price: 183, veg: true },
+                    { name: "Lemon Iced Tea", price: 183, veg: true },
+                    { name: "Peach Iced Tea", price: 183, veg: true },
+                    { name: "Watermelon Iced Tea", price: 183, veg: true }
+                ]
+            },
+            "Mojitos": {
+                icon: "🌿",
+                items: [
+                    { name: "Beat The Heat", price: 209, veg: true },
+                    { name: "Fresh Lime Soda", price: 209, veg: true },
+                    { name: "Green Apple Mint", price: 209, veg: true },
+                    { name: "Litchi Fizz", price: 209, veg: true },
+                    { name: "Mango Mojito", price: 209, veg: true },
+                    { name: "Minty Mirage", price: 209, veg: true },
+                    { name: "Ocean Whisper", price: 209, veg: true },
+                    { name: "Spicy Mango With Cranberry", price: 209, veg: true },
+                    { name: "Virgin Mojito", price: 209, veg: true },
+                    { name: "Watermelon Mojito", price: 209, veg: true }
+                ]
+            },
+            "Special Mocktails": {
+                icon: "🍹",
+                items: [
+                    { name: "Lemonade (Mint)", price: 223, veg: true },
+                    { name: "Litchi Colada", price: 223, veg: true },
+                    { name: "Passion Petal", price: 223, veg: true },
+                    { name: "Pina Colada", price: 223, veg: true },
+                    { name: "Sunset Serenade", price: 223, veg: true }
+                ]
+            },
+            "Waffles & Desserts": {
+                icon: "🧇",
+                items: [
+                    { name: "Nutella Banana Waffle", price: 223, veg: true },
+                    { name: "Overloaded Chocolate Waffle", price: 185, veg: true },
+                    { name: "Strawberry Waffle", price: 185, veg: true },
+                    { name: "Blueberry Cheesecake", price: 196, veg: true },
+                    { name: "Chocolate Brownie With Ice Cream", price: 218, veg: false },
+                    { name: "Chocolate Cheese Cake", price: 185, veg: true },
+                    { name: "Lotus Biscoff Cheesecake", price: 223, veg: true },
+                    { name: "Oreo Cheesecake", price: 185, veg: true },
+                    { name: "Strawberry Cheesecake", price: 196, veg: true }
+                ]
+            }
+        };
+
+        const categories = Object.keys(menu);
+        let activeCategory = 'ALL';
+        let activeFilter = 'ALL';
+        let searchTerm = '';
+
+        // Build category pills
+        const pillsContainer = document.getElementById('categoryPills');
+        categories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = 'pill-btn';
+            btn.dataset.category = cat;
+            btn.textContent = menu[cat].icon + ' ' + cat;
+            pillsContainer.appendChild(btn);
+        });
+
+        // Event listeners
+        document.getElementById('filterRow').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                activeFilter = e.target.dataset.filter;
+                renderMenu();
+            }
+        });
+
+        pillsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('pill-btn')) {
+                document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                activeCategory = e.target.dataset.category;
+                renderMenu();
+            }
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchTerm = e.target.value.toLowerCase();
+            renderMenu();
+        });
+
+        function renderMenu() {
+            const container = document.getElementById('menuContent');
+            const visibleCategories = activeCategory === 'ALL' ? categories : [activeCategory];
+            let html = '';
+
+            visibleCategories.forEach((cat, idx) => {
+                const items = menu[cat].items.filter(item => {
+                    const matchFilter = activeFilter === 'ALL' ||
+                        (activeFilter === 'VEG' && item.veg) ||
+                        (activeFilter === 'NON-VEG' && !item.veg);
+                    const matchSearch = item.name.toLowerCase().includes(searchTerm);
+                    return matchFilter && matchSearch;
+                });
+
+                if (items.length === 0) return;
+
+                html += `<div class="category-section" style="animation-delay: ${idx * 0.05}s">
+                    <div class="category-header">
+                        <h3 class="category-name">${cat}</h3>
+                        <div class="category-line"></div>
+                    </div>
+                    <div class="items-grid">`;
+
+                items.forEach(item => {
+                    html += `<div class="menu-item">
+                        <div class="item-left">
+                            <div class="veg-indicator ${item.veg ? '' : 'nonveg-indicator'}">
+                                <div class="dot"></div>
+                            </div>
+                            <span class="item-name">${item.name}</span>
+                        </div>
+                        <span class="item-price">₹${item.price}</span>
+                    </div>`;
+                });
+
+                html += `</div></div>`;
+            });
+
+            if (html === '') {
+                html = '<div style="text-align:center; padding:80px 0; color: var(--cream-40); font-size: 16px;">No items found matching your search.</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Initial render
+        renderMenu();
+    </script>
+</body>
+</html>
+
