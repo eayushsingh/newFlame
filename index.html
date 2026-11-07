@@ -773,114 +773,186 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           RESERVATION SECTION
+           TESTIMONIALS SECTION
            ═══════════════════════════════════════════════════════════════ */
-        .reservation {
-            background: linear-gradient(135deg, #0D0D0D 0%, #1A0A0A 100%);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .reserve-left {
-            padding: 80px;
+        .testimonials {
+            background: #0B0B0B;
+            padding: 120px 0;
             position: relative;
+            border-top: 1px solid var(--gold-subtle);
         }
 
-        .reserve-perks {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 64px;
-        }
-
-        .perk-item {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-        .perk-dash { color: var(--gold); font-weight: 700; }
-        .perk-text { font-size: 14px; color: var(--cream-50); letter-spacing: 0.02em; }
-
-        .reserve-photo {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            border: 1px solid rgba(201,168,76,0.15);
-            overflow: hidden;
-        }
-        .reserve-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-
-        .reserve-right {
-            background: var(--dark-alt);
-            padding: 56px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .reserve-form {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-
-        .form-input, .form-select, .form-textarea {
-            border: none;
-            border-bottom: 1px solid rgba(201,168,76,0.2);
-            background: transparent;
-            color: var(--cream);
-            padding: 16px 0;
-            font-family: var(--font-body);
-            font-size: 14px;
-            outline: none;
-            width: 100%;
-            transition: border-color 0.3s ease;
-        }
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            border-bottom-color: var(--gold);
-        }
-        .form-input::placeholder, .form-textarea::placeholder {
-            color: rgba(245, 237, 214, 0.3);
-        }
-
-        .form-select option { background: var(--dark); }
-
-        .form-row { display: flex; gap: 24px; flex-wrap: wrap; }
-        .form-row > * { flex: 1; min-width: 150px; }
-
-        .form-textarea { resize: none; }
-
-        .submit-btn {
-            height: 56px;
-            background: var(--gold);
-            color: var(--dark);
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 12px;
-        }
-        .submit-btn:hover {
-            background: var(--cream);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(201,168,76,0.2);
-        }
-
-        .reserve-note {
-            font-size: 11px;
-            color: var(--cream-35);
+        .testimonials-header {
             text-align: center;
-            margin-top: 32px;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: rgba(22, 22, 22, 0.7);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 14px;
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201, 168, 76, 0.45);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(201, 168, 76, 0.08);
+        }
+
+        .testimonial-stars {
+            color: var(--gold);
+            font-size: 14px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-accent);
+            font-size: 19px;
+            color: rgba(245, 237, 214, 0.85);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 28px;
+            flex: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-top: 1px solid rgba(201, 168, 76, 0.12);
+            padding-top: 20px;
+        }
+
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1f1a14, #3a2e18);
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--gold);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .author-name {
+            font-family: var(--font-display);
+            font-size: 15px;
+            color: var(--cream);
+            margin-bottom: 3px;
+        }
+
+        .author-title {
+            font-size: 11px;
+            color: var(--cream-40);
             letter-spacing: 0.05em;
         }
 
-        @media (max-width: 768px) {
-            .reservation { grid-template-columns: 1fr; }
-            .reserve-left { padding: 80px 32px; }
-            .reserve-right { padding: 48px 32px; }
+        @media (max-width: 900px) {
+            .testimonials-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           FAQ SECTION
+           ═══════════════════════════════════════════════════════════════ */
+        .faq {
+            background: #0E0E0E;
+            padding: 120px 0;
+            position: relative;
+            border-top: 1px solid var(--gold-subtle);
+        }
+
+        .faq-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .faq-list {
+            max-width: 860px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: rgba(22, 22, 22, 0.6);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover, .faq-item.active {
+            border-color: rgba(201, 168, 76, 0.4);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px 28px;
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-family: var(--font-display);
+            font-size: 17px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            gap: 16px;
+            transition: color 0.25s ease;
+        }
+
+        .faq-question:hover, .faq-item.active .faq-question {
+            color: var(--gold);
+        }
+
+        .faq-icon {
+            font-size: 20px;
+            color: var(--gold);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease;
+            padding: 0 28px;
+            font-size: 14px;
+            color: var(--cream-60);
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 28px 24px 28px;
         }
 
         /* ═══════════════════════════════════════════════════════════════
@@ -1113,9 +1185,10 @@
                 <a href="menu.html" class="nav-link">Repertoire</a>
                 <a href="#signatures" class="nav-link">Signatures</a>
                 <a href="#ambiance" class="nav-link">Ambiance</a>
-                <a href="#gallery" class="nav-link">Inside</a>
+                <a href="#testimonials" class="nav-link">Reviews</a>
+                <a href="#faq" class="nav-link">FAQ</a>
                 <a href="#location" class="nav-link">Contact</a>
-                <a href="#reserve" class="nav-reserve">Reserve</a>
+                <a href="menu.html" class="nav-reserve">View Menu</a>
             </div>
 
             <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu">
@@ -1132,9 +1205,10 @@
         <a href="menu.html" class="mobile-link">Repertoire</a>
         <a href="#signatures" class="mobile-link" onclick="closeMobileMenu()">Signatures</a>
         <a href="#ambiance" class="mobile-link" onclick="closeMobileMenu()">Ambiance</a>
-        <a href="#gallery" class="mobile-link" onclick="closeMobileMenu()">Inside</a>
+        <a href="#testimonials" class="mobile-link" onclick="closeMobileMenu()">Reviews</a>
+        <a href="#faq" class="mobile-link" onclick="closeMobileMenu()">FAQ</a>
         <a href="#location" class="mobile-link" onclick="closeMobileMenu()">Contact</a>
-        <a href="#reserve" class="mobile-reserve-btn" onclick="closeMobileMenu()">Reserve Now</a>
+        <a href="menu.html" class="mobile-reserve-btn" onclick="closeMobileMenu()">Explore Menu</a>
     </div>
 
     <!-- ══════════════════════════════════════════════════════════════════
@@ -1158,7 +1232,7 @@
 
                 <div class="hero-cta-row">
                     <a href="menu.html" class="cta-primary">Our Menu</a>
-                    <a href="#reserve" class="cta-secondary">Reserve a Table</a>
+                    <a href="#faq" class="cta-secondary">Explore FAQ</a>
                     <a href="#ambiance" class="hero-story-link">Our Story</a>
                 </div>
 
@@ -1335,50 +1409,159 @@
             </div>
         </div>
     </section>
-    <section class="reservation" id="reserve">
-        <div class="reserve-left">
-            <p class="section-eyebrow reveal">Private Booking</p>
-            <h2 class="section-title reveal reveal-delay-1" style="margin-bottom: 40px;">
-                <span style="display:block;">Command</span>
-                <span>Your Table</span>
-            </h2>
-
-            <div class="reserve-perks reveal reveal-delay-2">
-                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Priority seating in crimson booths</span></div>
-                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Perfect for intimate family gatherings</span></div>
-                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Vibrant non-alcoholic mixology</span></div>
-                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Sainikpuri's premier dark luxury ambiance</span></div>
-                <div class="perk-item"><span class="perk-dash">—</span><span class="perk-text">Groups up to 8 · larger via concierge</span></div>
+    <!-- ══════════════════════════════════════════════════════════════════
+         TESTIMONIALS SECTION
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="testimonials-header reveal">
+                <p class="section-eyebrow">Patron Praise</p>
+                <h2 class="section-title">
+                    <span>Words From </span><span>Our Guests</span>
+                </h2>
+                <p style="font-size: 14px; color: var(--cream-50); line-height: 1.6; margin-top: 16px;">
+                    <span style="color: var(--gold); margin-right: 6px;">★★★★★</span>
+                    Rated 4.9 · Over 2,000+ delighted diners across Hyderabad
+                </p>
             </div>
 
-            <div class="reserve-photo reveal reveal-delay-3">
-                <img src="images/interior.webp" alt="Interior">
+            <div class="testimonials-grid">
+                <!-- Card 1 -->
+                <div class="testimonial-card reveal reveal-delay-1">
+                    <div>
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-quote">
+                            "Hyderabad finally has a true luxury sanctuary that is 100% alcohol-free without sacrificing grandeur. The crimson booths and dragon chicken are sensational."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">VR</div>
+                        <div>
+                            <h4 class="author-name">Dr. Vikram Reddy</h4>
+                            <p class="author-title">Sainikpuri Resident · Regular Guest</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="testimonial-card reveal reveal-delay-2">
+                    <div>
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-quote">
+                            "The dark amber atmosphere is breathtaking. The artisanal mocktails and sizzling tandoori grills made our anniversary dinner unforgettable."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AM</div>
+                        <div>
+                            <h4 class="author-name">Arjun &amp; Sneha</h4>
+                            <p class="author-title">Food &amp; Lifestyle Connoisseurs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="testimonial-card reveal reveal-delay-3">
+                    <div>
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-quote">
+                            "Our family gathering of 12 was handled with pure elegance. The kids obsessed over the Lotus Biscoff shakes while the elders loved the Apollo Fish."
+                        </p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div>
+                            <h4 class="author-name">Meera Kulkarni</h4>
+                            <p class="author-title">Family Celebration Host</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="reserve-right">
-            <form class="reserve-form" onsubmit="handleReservation(event)">
-                <input type="text" class="form-input" placeholder="Full Name" required>
-                <div class="form-row">
-                    <input type="date" class="form-input">
-                    <select class="form-select">
-                        <option value="1">1 Guest</option>
-                        <option value="2" selected>2 Guests</option>
-                        <option value="3">3 Guests</option>
-                        <option value="4">4 Guests</option>
-                        <option value="5">5 Guests</option>
-                        <option value="6">6 Guests</option>
-                        <option value="7">7 Guests</option>
-                        <option value="8">8 Guests</option>
-                        <option value="9">9 Guests</option>
-                        <option value="10">10 Guests</option>
-                    </select>
+    <!-- ══════════════════════════════════════════════════════════════════
+         FAQ SECTION
+         ══════════════════════════════════════════════════════════════════ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="faq-header reveal">
+                <p class="section-eyebrow">Common Inquiries</p>
+                <h2 class="section-title">
+                    <span>Frequently </span><span>Asked Questions</span>
+                </h2>
+                <p style="font-size: 14px; color: var(--cream-50); line-height: 1.6; margin-top: 16px;">
+                    Everything you need to know before visiting our Sainikpuri domain.
+                </p>
+            </div>
+
+            <div class="faq-list">
+                <!-- FAQ 1 -->
+                <div class="faq-item reveal reveal-delay-1 active">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is Flames n Spirits completely non-alcoholic?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes, 100%. We are a premier zero-proof establishment. Our master mixologists curate exquisite botanical mocktails, cold brews, and specialty frappes that provide a lavish dining experience suited for families and connoisseurs alike.
+                    </div>
                 </div>
-                <input type="tel" class="form-input" placeholder="Phone Number (+91)">
-                <textarea class="form-textarea" placeholder="Special Requests (Optional)" rows="3"></textarea>
-                <button type="submit" class="submit-btn">Confirm Reservation →</button>
-            </form>
-            <p class="reserve-note">For groups 8+ contact us directly · +91 97003 33116</p>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item reveal reveal-delay-2">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Do you accept walk-ins or are reservations required?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Walk-in diners are always warmly welcomed! For large groups of 6 or more, or for prime weekend dinner slots (8 PM – 10:30 PM), we recommend calling ahead at +91 97003 33116 to secure your preferred crimson booth.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item reveal reveal-delay-3">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What cuisines do you serve?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Our culinary repertoire includes North Indian gravies, Mughlai delicacies, Hyderabadi biryanis &amp; sizzlers, wok-tossed Indo-Chinese, gourmet Continental pizzas and pastas, artisanal waffles, and premium cafe beverages.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item reveal reveal-delay-1">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What are your opening hours?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        We are open every day of the week. Lunch service runs from 12:00 PM to 3:00 PM, and Dinner service is hosted from 7:00 PM to 11:30 PM.
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item reveal reveal-delay-2">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is parking available at the venue?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Yes, convenient vehicle parking is available along the wide street directly in front of our entrance at Plot No. 137, Phase-II, Defence Colony, Sainikpuri.
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item reveal reveal-delay-3">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can we host private birthdays or anniversaries here?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Absolutely. We frequently host bespoke private birthdays, family milestones, and intimate celebrations. Contact our manager at +91 97003 33116 to arrange specialized decor and custom group menus.
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1451,8 +1634,9 @@
                 <a href="menu.html" class="footer-link">Repertoire</a>
                 <a href="#signatures" class="footer-link">Signatures</a>
                 <a href="#ambiance" class="footer-link">Ambiance</a>
-                <a href="#gallery" class="footer-link">Inside</a>
-                <a href="#reserve" class="footer-link">Reserve</a>
+                <a href="#testimonials" class="footer-link">Reviews</a>
+                <a href="#faq" class="footer-link">FAQ</a>
+                <a href="#location" class="footer-link">Contact</a>
             </div>
 
             <!-- Contact -->
@@ -1509,19 +1693,14 @@
             }
         }, { passive: true });
 
-        // ── Reservation form ──
-        function handleReservation(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('.submit-btn');
-            btn.textContent = '✓ REQUEST SENT';
-            btn.style.background = '#4CAF50';
-            btn.style.color = '#fff';
-            setTimeout(() => {
-                btn.textContent = 'CONFIRM RESERVATION →';
-                btn.style.background = '';
-                btn.style.color = '';
-                e.target.reset();
-            }, 3000);
+        // ── FAQ Accordion Toggle ──
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const wasActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+            if (!wasActive) {
+                item.classList.add('active');
+            }
         }
 
         // ── Parallax on hero glow ──
